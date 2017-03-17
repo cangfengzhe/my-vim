@@ -1,0 +1,59 @@
+snippet frame "My Python Framework" !p
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+${desc}
+"""
+
+# ---------
+# Change Logs:
+#
+# ---------
+
+__author__ = 'Li Pidong'
+__email__ = 'pidong.li@genetronhealth.com'
+__version__ = '1.0.1'
+__status__ = ''
+
+import sys
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
+import argparse
+import logging
+
+
+def log(file_name, logger_name='root', verbose=False):
+    logger = logging.getLogger(logger_name)
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    handler = logging.FileHandler(file_name)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    if verbose:
+        console = logging.StreamHandler()
+        console.setLevel(logging.INFO)
+        logger.addHandler(console)
+    logger.setLevel(logging.INFO)
+    return logger
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(prog='')
+    parser.add_argument('--${name}', help='')
+    parser.add_argument('--log', help='log file, default=.log')
+    parser.add_argument("--verbose", help="increase output verbosity",
+                        action="store_true")
+
+    args = parser.parse_args()
+    verbose = args.verbose
+    log_file = args.log
+    if len(sys.argv) == 1:
+        parser.print_help()
+        exit()
+endsnippet
+
+snippet abc
+<a href="$1"${2: class="${3:link}"}>
+     $0
+	 </a>
+endsnippet
