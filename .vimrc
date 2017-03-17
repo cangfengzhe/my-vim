@@ -1,0 +1,1 @@
+/home/lipidong/.vimrc
